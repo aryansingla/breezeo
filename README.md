@@ -42,6 +42,7 @@ backend/
   app/main.py        API endpoints, also serves the built frontend
   data/              downloaded Elexon data
   tests/             engine tests
+  pytest.ini         lets pytest find the app package
 frontend/
   src/App.tsx        layout, URL routing
   src/ForecastPage.tsx
