@@ -6,6 +6,7 @@ import {
   GREEN,
   INK,
   Line,
+  PageSkeleton,
   Signal,
   SummaryTiles,
   WatchList,
@@ -68,9 +69,14 @@ export function ForecastPage({
   )
 
   return (
-    <Frame tabs={tabs} controls={controls} busy={loading}>
-      {error && <p className="error">{error}</p>}
-      {data && <DayDetail day={data} sort={sort} onSortChange={onSortChange} />}
+    <Frame tabs={tabs} controls={controls}>
+      {loading ? (
+        <PageSkeleton />
+      ) : error ? (
+        <p className="error">{error}</p>
+      ) : (
+        data && <DayDetail day={data} sort={sort} onSortChange={onSortChange} />
+      )}
     </Frame>
   )
 }

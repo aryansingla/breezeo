@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { AccuracyPage } from './AccuracyPage'
 import { ForecastPage } from './ForecastPage'
 import { getMeta, useApi } from './api'
-import { dateTime, type Sort } from './ui'
+import { PageSkeleton, dateTime, type Sort } from './ui'
 
 type Page = 'forecast' | 'accuracy'
 
@@ -95,7 +95,13 @@ export default function App() {
         </section>
 
         {meta.error && <p className="error">Could not reach the API: {meta.error}</p>}
-        {!meta.data && !meta.error && <p className="muted">Loading…</p>}
+        {!meta.data && !meta.error && (
+          <div className="frame">
+            <div className="frame-body">
+              <PageSkeleton />
+            </div>
+          </div>
+        )}
 
         {meta.data &&
           (page === 'forecast' ? (

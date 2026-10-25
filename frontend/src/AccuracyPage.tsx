@@ -6,6 +6,7 @@ import {
   Frame,
   INK,
   Line,
+  PageSkeleton,
   SOFT_GREEN,
   Signal,
   SummaryTiles,
@@ -45,12 +46,13 @@ export function AccuracyPage({ tabs, decisionTime, onDecisionTimeChange, onOpenD
   )
 
   return (
-    <Frame tabs={tabs} controls={controls} busy={loading}>
-      {error && <p className="error">{error}</p>}
-      {data ? (
-        <AccuracyDetail accuracy={data} onOpenDay={onOpenDay} sort={sort} onSortChange={onSortChange} />
+    <Frame tabs={tabs} controls={controls}>
+      {loading ? (
+        <PageSkeleton />
+      ) : error ? (
+        <p className="error">{error}</p>
       ) : (
-        !error && <p className="muted">Loading…</p>
+        data && <AccuracyDetail accuracy={data} onOpenDay={onOpenDay} sort={sort} onSortChange={onSortChange} />
       )}
     </Frame>
   )

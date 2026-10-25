@@ -99,16 +99,48 @@ export function sortable<T>(
   return { rows: sorted, header }
 }
 
-type FrameProps = { tabs: ReactNode; controls: ReactNode; busy: boolean; children: ReactNode }
+type FrameProps = { tabs: ReactNode; controls: ReactNode; children: ReactNode }
 
-export function Frame({ tabs, controls, busy, children }: FrameProps) {
+export function Frame({ tabs, controls, children }: FrameProps) {
   return (
     <div className="frame">
       <div className="frame-bar">
         {tabs}
         <div className="controls">{controls}</div>
       </div>
-      <div className={busy ? 'frame-body busy' : 'frame-body'}>{children}</div>
+      <div className="frame-body">{children}</div>
+    </div>
+  )
+}
+
+export function PageSkeleton() {
+  return (
+    <div aria-busy="true" aria-label="Loading">
+      <div className="tiles">
+        {Array.from({ length: 5 }, (_, i) => (
+          <div key={i}>
+            <span className="bone short" />
+            <span className="bone value" />
+            <span className="bone" />
+          </div>
+        ))}
+      </div>
+      <div className="columns">
+        <section className="panel">
+          <span className="bone title" />
+          <span className="bone plot" />
+        </section>
+        <aside className="side">
+          <span className="bone block" />
+          <span className="bone block" />
+        </aside>
+      </div>
+      <section className="panel">
+        <span className="bone title" />
+        {Array.from({ length: 6 }, (_, i) => (
+          <span key={i} className="bone row" />
+        ))}
+      </section>
     </div>
   )
 }
