@@ -7,7 +7,7 @@ For purchase decisions made in January 2026 it shows:
 1. **The latest forecast at decision time.** Pick a delivery day and the time you buy the day before. The app finds the most recent Elexon wind forecast published before then and compares it with what actually happened, hour by hour.
 2. **How accurate those forecasts are.** Average error, bias, RMSE, the worst 10% of hours, and forecast against actual energy, broken down by day, by hour of day and by how far ahead the forecast was made.
 
-Live app: _add URL after deploying_
+Live app: https://breezeo.vercel.app
 
 ## Data
 
@@ -49,6 +49,9 @@ frontend/
   src/api.ts         API types and requests
   src/ui.tsx         formatting, sortable tables, summary cards, charts
   src/styles.css
+api/index.py         Vercel entry point for the API
+vercel.json          Vercel build and routing
+requirements.txt     Python packages
 Dockerfile           builds the frontend and serves it from FastAPI
 docker-compose.yml
 .env.example
@@ -68,11 +71,11 @@ docker compose up --build
 
 Open http://localhost:8000
 
-**Without Docker** (Python 3.9+, Node 20+), in two terminals:
+**Without Docker** (Python 3.9+, Node 20+), from the project folder in two terminals:
 
 ```bash
-cd backend
 pip install -r requirements.txt
+cd backend
 uvicorn app.main:app --reload --port 8000
 ```
 
